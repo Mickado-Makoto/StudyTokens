@@ -1,2 +1,30 @@
-node_modules/  
-dist/ 
+# ── Dépendances ──────────────────────────────
+node_modules/
+
+# ── Builds ───────────────────────────────────
+dist/
+out/
+build/
+
+# ── Electron cache ───────────────────────────
+.webpack/
+
+# ── Secrets & configs locaux ─────────────────
+# (le token GitHub est stocké dans electron-store, jamais commit)
+*.env
+.env.local
+
+# ── OS ───────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Logs ─────────────────────────────────────
+*.log
+npm-debug.log*
+
+# ── IDE ───────────────────────────────────────
+.vscode/settings.json
+.idea/
+*.suo
+*.user

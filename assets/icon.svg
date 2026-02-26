@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Background circle -->
+  <circle cx="256" cy="256" r="248" fill="#0a1f12"/>
+  <circle cx="256" cy="256" r="248" fill="none" stroke="#2d6a3f" stroke-width="8"/>
+  
+  <!-- Outer ring detail -->
+  <circle cx="256" cy="256" r="220" fill="none" stroke="#1a4a28" stroke-width="3"/>
+  
+  <!-- Top banner -->
+  <path d="M 120 140 Q 256 100 392 140 L 380 170 Q 256 130 132 170 Z" fill="#1e5c2e"/>
+  <path d="M 130 145 Q 256 108 382 145 L 374 162 Q 256 125 138 162 Z" fill="#2d7a42"/>
+  
+  <!-- Bottom banner -->
+  <path d="M 120 372 Q 256 412 392 372 L 380 342 Q 256 382 132 342 Z" fill="#1e5c2e"/>
+  <path d="M 130 367 Q 256 404 382 367 L 374 350 Q 256 387 138 350 Z" fill="#2d7a42"/>
+  
+  <!-- Center hexagon shield -->
+  <polygon points="256,155 336,200 336,312 256,357 176,312 176,200" fill="#0d2b16"/>
+  <polygon points="256,165 326,206 326,306 256,347 186,306 186,206" fill="#142e1a"/>
+  <polygon points="256,175 316,212 316,300 256,337 196,300 196,212" fill="none" stroke="#2d6a3f" stroke-width="2"/>
+  
+  <!-- ST letters -->
+  <text x="256" y="228" font-family="monospace" font-weight="900" font-size="56" 
+    fill="#4ade80" text-anchor="middle" letter-spacing="-4">ST</text>
+  
+  <!-- Divider line -->
+  <line x1="196" y1="242" x2="316" y2="242" stroke="#2d6a3f" stroke-width="2"/>
+  
+  <!-- STUDYTOKENS text -->
+  <text x="256" y="290" font-family="monospace" font-weight="700" font-size="22" 
+    fill="#86efac" text-anchor="middle" letter-spacing="1">STUDY</text>
+  <text x="256" y="316" font-family="monospace" font-weight="700" font-size="22" 
+    fill="#4ade80" text-anchor="middle" letter-spacing="1">TOKENS</text>
+  
+  <!-- Corner decorations -->
+  <circle cx="178" cy="195" r="5" fill="#2d6a3f"/>
+  <circle cx="334" cy="195" r="5" fill="#2d6a3f"/>
+  <circle cx="178" cy="317" r="5" fill="#2d6a3f"/>
+  <circle cx="334" cy="317" r="5" fill="#2d6a3f"/>
+  
+  <!-- Top text arc -->
+  <path id="topArc" d="M 145 175 A 115 115 0 0 1 367 175" fill="none"/>
+  <text font-family="monospace" font-size="18" fill="#4ade80" letter-spacing="4">
+    <textPath href="#topArc" startOffset="50%" text-anchor="middle">● OPÉRATION ●</textPath>
+  </text>
+  
+  <!-- Bottom text arc -->
+  <path id="botArc" d="M 145 337 A 115 115 0 0 0 367 337" fill="none"/>
+  <text font-family="monospace" font-size="16" fill="#4ade80" letter-spacing="3">
+    <textPath href="#botArc" startOffset="50%" text-anchor="middle">● RÉUSSITE ●</textPath>
+  </text>
+</svg>

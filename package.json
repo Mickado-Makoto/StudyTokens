@@ -1,30 +1,80 @@
 {
-  "name": "study-tokens",
-  "version": "1.1.0",
-  "description": "Gagne des tokens en étudiant 🏥",
+  "name": "studytokens",
+  "version": "1.2.0",
+  "description": "StudyTokens — Application de motivation pour les études",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build": "electron-builder",
-    "publish": "electron-builder --publish always"
+    "build": "electron-builder --win --x64",
+    "publish": "electron-builder --win --publish always",
+    "build:installer": "electron-builder --win --x64 --config.win.target=nsis",
+    "build:portable": "electron-builder --win --x64 --config.win.target=portable"
   },
   "build": {
-    "appId": "com.studytokens.app",
+    "appId": "com.mickado-makoto.studytokens",
     "productName": "StudyTokens",
-    "publish": {
-      "provider": "github",
-      "owner": "Mickado-Makoto",
-      "repo": "StudyTokens"
-    },
     "win": {
-      "target": "nsis"
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "assets/icon.ico",
+      "requestedExecutionLevel": "asInvoker",
+      "artifactName": "StudyTokens-${version}-Setup.${ext}",
+      "signingHashAlgorithms": [
+        "sha256"
+      ]
     },
     "nsis": {
       "oneClick": true,
-      "runAfterFinish": true
+      "perMachine": false,
+      "allowElevation": false,
+      "allowToChangeInstallationDirectory": false,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "StudyTokens",
+      "installerIcon": "assets/icon.ico",
+      "uninstallerIcon": "assets/icon.ico",
+      "runAfterFinish": true,
+      "deleteAppDataOnUninstall": false,
+      "installerHeaderIcon": "assets/icon.ico",
+      "license": "LICENSE.txt",
+      "warningsAsErrors": false
     },
+    "publish": {
+      "provider": "github",
+      "owner": "Mickado-Makoto",
+      "repo": "StudyTokens",
+      "releaseType": "release"
+    },
+    "extraMetadata": {
+      "main": "main.js"
+    },
+    "portable": {
+      "artifactName": "StudyTokens-${version}-Portable.${ext}"
+    },
+    "files": [
+      "**/*",
+      "!.git/**",
+      "!dist/**",
+      "!*.bat",
+      "!*.ps1",
+      "!*.md",
+      "!DEBLOQUER.bat"
+    ],
     "directories": {
-      "output": "dist"
+      "output": "dist",
+      "buildResources": "assets"
     }
   },
   "dependencies": {
@@ -33,6 +83,6 @@
   },
   "devDependencies": {
     "electron": "^28.0.0",
-    "electron-builder": "^24.0.0"
+    "electron-builder": "^24.9.1"
   }
 }

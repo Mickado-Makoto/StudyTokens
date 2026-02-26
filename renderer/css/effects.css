@@ -1,0 +1,286 @@
+/* ================================================
+   EFFECTS.CSS — Effets visuels animés type Discord
+   Auras, particules, néons, lueurs orbitales
+   ================================================ */
+
+/* ── Nébuleuses de fond ── */
+@keyframes nebula-drift {
+  0%   { transform: scale(1)   translate(0, 0); }
+  100% { transform: scale(1.2) translate(20px, -20px); }
+}
+@keyframes nebula-drift-2 {
+  0%   { transform: scale(1.1) translate(0, 0); }
+  100% { transform: scale(0.9) translate(-15px, 25px); }
+}
+
+/* La nébuleuse est injectée par init.js */
+.ls-nebula-orb { transition: opacity 1s; }
+
+/* ── Écran de chargement — effets avancés ── */
+/* Halo pulsant derrière le logo */
+.ls-core::before {
+  content: '';
+  position: absolute; inset: -30px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(123,159,255,.12) 0%, transparent 70%);
+  animation: halo-pulse 2.2s ease-in-out infinite;
+}
+.ls-core::after {
+  content: '';
+  position: absolute; inset: -50px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(192,132,252,.07) 0%, transparent 70%);
+  animation: halo-pulse 2.2s ease-in-out .5s infinite;
+}
+@keyframes halo-pulse {
+  0%,100% { transform: scale(1); opacity: .6; }
+  50%      { transform: scale(1.25); opacity: 1; }
+}
+
+/* Anneau orbital lumineux */
+.ls-orbit-dot {
+  filter: drop-shadow(0 0 6px #7b9fff) drop-shadow(0 0 12px rgba(123,159,255,.5));
+}
+.ls-orbit-dot-2 {
+  filter: drop-shadow(0 0 5px #c084fc) drop-shadow(0 0 10px rgba(192,132,252,.5));
+}
+
+/* Trait de lueur en bas de la barre */
+.ls-bar-fill::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.3) 50%, transparent 100%);
+  animation: bar-shimmer 1.4s ease infinite;
+}
+@keyframes bar-shimmer {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(300%); }
+}
+
+/* ── Token pop animation ── */
+@keyframes token-pop {
+  0%   { transform: translateY(0) scale(1); opacity: 1; }
+  60%  { transform: translateY(-50px) scale(1.4); opacity: 1; }
+  100% { transform: translateY(-90px) scale(.8); opacity: 0; }
+}
+.token-pop {
+  position: fixed; font-family: var(--font-mono); font-size: 16px; font-weight: 700;
+  color: var(--accent); pointer-events: none; z-index: 9999;
+  animation: token-pop 1.1s ease-out forwards;
+  text-shadow: 0 0 14px var(--accent-glow);
+  filter: drop-shadow(0 0 8px var(--accent-glow));
+}
+
+/* ── Aura de la barre titre — effet lueur bas ── */
+#titlebar::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--accent) 30%, var(--purple) 70%, transparent 100%);
+  opacity: .5;
+  animation: titlebar-glow 4s ease-in-out infinite;
+}
+@keyframes titlebar-glow {
+  0%,100% { opacity: .3; background-position: 0% 50%; }
+  50%      { opacity: .7; background-position: 100% 50%; }
+}
+
+/* ── Aura fond sidebar token box ── */
+.sidebar-tokens-box::before {
+  content: '◈';
+  position: absolute; right: -10px; top: -10px;
+  font-size: 64px; opacity: .04; color: var(--accent);
+  transform: rotate(0deg);
+  animation: badge-spin 20s linear infinite;
+}
+@keyframes badge-spin { to { transform: rotate(360deg); } }
+
+/* ── Lueur sur les nav items actifs ── */
+.nav-btn.active::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
+  background: var(--accent); border-radius: 0 2px 2px 0;
+  box-shadow: 0 0 8px var(--accent-glow), 0 0 20px var(--accent-glow);
+}
+.nav-btn { position: relative; }
+
+/* ── Carte reward — effet hover lueur ── */
+.reward-card:hover:not(.locked)::before {
+  content: '';
+  position: absolute; inset: 0; border-radius: var(--radius-lg);
+  background: radial-gradient(ellipse at 50% 0%, rgba(123,159,255,.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ── Effets stat cards ── */
+.stat-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(123,159,255,.3), transparent);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+.stat-card { position: relative; overflow: hidden; }
+
+/* ── Timer ring — glow amélioré ── */
+.timer-ring.chrono {
+  stroke: var(--accent);
+  filter: drop-shadow(0 0 6px var(--accent-glow))
+          drop-shadow(0 0 16px var(--accent-glow))
+          drop-shadow(0 0 30px rgba(123,159,255,.2));
+}
+.timer-ring.pomodoro-work {
+  stroke: var(--purple);
+  filter: drop-shadow(0 0 6px var(--purple-glow))
+          drop-shadow(0 0 16px var(--purple-glow));
+}
+.timer-ring.pomodoro-break {
+  stroke: var(--mint);
+  filter: drop-shadow(0 0 6px var(--mint-glow))
+          drop-shadow(0 0 16px var(--mint-glow));
+}
+
+/* ── Aura orbitale autour du cercle timer ── */
+.timer-circle-wrap::before {
+  content: '';
+  position: absolute; inset: -15px; border-radius: 50%;
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 65%);
+  opacity: 0; transition: opacity .6s;
+  animation: aura-idle 3s ease-in-out infinite;
+}
+@keyframes aura-idle {
+  0%,100% { opacity: .3; transform: scale(1); }
+  50%      { opacity: .6; transform: scale(1.04); }
+}
+.timer-circle-wrap.running::before { opacity: 1; animation: aura-pulse 1.5s ease-in-out infinite; }
+@keyframes aura-pulse {
+  0%,100% { transform: scale(1);    opacity: .6; }
+  50%      { transform: scale(1.07); opacity: 1; }
+}
+
+/* ── Étoiles flottantes en fond (cosmos uniquement) ── */
+[data-theme="cosmos"] #main-content::before {
+  content: '';
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background-image:
+    radial-gradient(1px 1px at 8%  15%, rgba(255,255,255,.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 25% 70%, rgba(255,255,255,.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 60% 25%, rgba(255,255,255,.4) 0%, transparent 100%),
+    radial-gradient(2px 2px at 45% 85%, rgba(123,159,255,.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 78% 55%, rgba(255,255,255,.25) 0%, transparent 100%),
+    radial-gradient(2px 2px at 90% 10%, rgba(192,132,252,.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 15% 40%, rgba(255,255,255,.2) 0%, transparent 100%),
+    radial-gradient(1px 1px at 70% 90%, rgba(94,231,196,.4) 0%, transparent 100%);
+}
+#main-content { position: relative; z-index: 1; }
+
+/* ── Scan line subtile sur les cards (cosmos) ── */
+[data-theme="cosmos"] .card::after {
+  content: '';
+  position: absolute; inset: 0; pointer-events: none; border-radius: inherit;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent, transparent 2px,
+    rgba(123,159,255,.008) 2px, rgba(123,159,255,.008) 4px
+  );
+}
+.card { position: relative; overflow: hidden; }
+
+/* ── Lueur on hover boutons ── */
+.btn-primary:hover {
+  box-shadow: 0 0 0 3px rgba(123,159,255,.15), 0 6px 26px var(--accent-glow);
+}
+
+/* ── Bouton admin — animation de pulsation ── */
+.admin-access-btn .admin-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+  0%,100% { box-shadow: 0 0 0 0 var(--purple-glow); opacity: 1; }
+  50%      { box-shadow: 0 0 0 4px transparent; opacity: .7; }
+}
+
+/* ── Logo badge — lueur tournante ── */
+.logo-badge {
+  position: relative;
+  animation: badge-glow 3s ease-in-out infinite;
+}
+@keyframes badge-glow {
+  0%,100% { box-shadow: 0 0 12px var(--accent-glow); }
+  50%      { box-shadow: 0 0 24px var(--accent-glow), 0 0 48px rgba(123,159,255,.15); }
+}
+
+/* ── Aura électrique (effet Discord) sur cartes thème ── */
+.theme-card.active {
+  box-shadow: 0 0 0 1px var(--accent), 0 0 20px rgba(123,159,255,.2), inset 0 0 20px rgba(123,159,255,.04);
+}
+
+/* ── Particules clignotantes sur dot statut titlebar ── */
+.tb-dot::after {
+  content: '';
+  position: absolute; inset: -4px; border-radius: 50%;
+  background: var(--accent); opacity: 0;
+  animation: ripple 2.5s ease-out infinite;
+}
+.tb-dot { position: relative; }
+@keyframes ripple {
+  0%   { transform: scale(1); opacity: .4; }
+  100% { transform: scale(3); opacity: 0; }
+}
+
+/* ── Halo derrière les palier milestones unlocked ── */
+.palier-milestone.unlocked .palier-bubble::after {
+  content: '';
+  position: absolute; inset: -8px; border-radius: 50%;
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+  animation: milestone-halo 2.5s ease-in-out infinite;
+}
+@keyframes milestone-halo {
+  0%,100% { opacity: .5; transform: scale(1); }
+  50%      { opacity: 1; transform: scale(1.2); }
+}
+
+/* ── Gradient animé sur la barre palier ── */
+.palier-bar-fill {
+  background-size: 200% 100%;
+  background-image: linear-gradient(90deg, var(--accent-dark) 0%, var(--accent-light) 50%, var(--purple) 100%);
+  animation: bar-gradient 4s linear infinite;
+}
+@keyframes bar-gradient {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* ── Multiplicateur badge ── */
+.multiplier-badge {
+  position: relative; overflow: hidden;
+}
+.multiplier-badge::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(244,196,48,.15) 50%, transparent 100%);
+  animation: badge-sweep 2s linear infinite;
+}
+@keyframes badge-sweep {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* ── CMS Admin — lueur topbar ── */
+.cms-topbar::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(99,131,255,.4), rgba(192,132,252,.4), transparent);
+  animation: titlebar-glow 4s ease-in-out infinite;
+}
+.cms-topbar { position: relative; }
+
+/* ── Étoiles / sparkles sur écran chargement ── */
+@keyframes sparkle {
+  0%,100% { opacity: 0; transform: scale(0) rotate(0deg); }
+  50%      { opacity: 1; transform: scale(1) rotate(180deg); }
+}
+
+/* ── Theme Cosmos — séparateur sidebar avec lueur ── */
+[data-theme="cosmos"] #sidebar::after {
+  content: '';
+  position: absolute; right: 0; top: 20%; bottom: 20%; width: 1px;
+  background: linear-gradient(180deg, transparent, rgba(123,159,255,.2), rgba(192,132,252,.15), transparent);
+}
+#sidebar { position: relative; }

@@ -1,0 +1,76 @@
+// ================================================
+//   FIRESTORE SECURITY RULES — StudyTokens
+//   À coller dans Firebase Console → Firestore → Règles
+// ================================================
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ── Helpers ──────────────────────────────────
+    function isAuth() {
+      return request.auth != null;
+    }
+    function isOwner(uid) {
+      return request.auth.uid == uid;
+    }
+    function getRole() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role;
+    }
+    function isAdmin() {
+      return getRole() in ['administrateur', 'fondateur'];
+    }
+    function isMod() {
+      return getRole() in ['moderateur', 'administrateur', 'fondateur'];
+    }
+    function isFondateur() {
+      return getRole() == 'fondateur';
+    }
+    function notBanned() {
+      let u = get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+      return u.isBanned != true;
+    }
+
+    // ── Profils utilisateurs ──────────────────────
+    match /users/{uid} {
+      // Lecture : soi-même ou modérateur+
+      allow read: if isAuth() && (isOwner(uid) || isMod());
+      // Création : soi-même (inscription)
+      allow create: if isAuth() && isOwner(uid);
+      // Modification : soi-même (champs limités) OU admin
+      allow update: if isAuth() && (
+        (isOwner(uid) && !request.resource.data.diff(resource.data).affectedKeys()
+          .hasAny(['role', 'isBanned', 'banUntil', 'banReason', 'bannedBy']))
+        || isAdmin()
+      );
+      // Suppression : admin seulement
+      allow delete: if isAuth() && isAdmin();
+    }
+
+    // ── Données utilisateur (tokens, sessions...) ──
+    match /users/{uid}/data/{doc} {
+      // Lecture/écriture : soi-même ou admin
+      allow read, write: if isAuth() && (isOwner(uid) || isAdmin()) && notBanned();
+    }
+
+    // ── Tentatives admin (rate limiting) ──────────
+    match /adminAttempts/{uid} {
+      allow read, write: if isAuth() && isOwner(uid);
+      allow read: if isAuth() && isAdmin();
+    }
+
+    // ── Alertes de sécurité ───────────────────────
+    match /securityAlerts/{alertId} {
+      // Création : tout utilisateur authentifié (pour logger les événements)
+      allow create: if isAuth();
+      // Lecture/modification : admin seulement
+      allow read, update: if isAuth() && isAdmin();
+      allow delete: if isAuth() && isFondateur();
+    }
+
+    // ── Refuser tout le reste ─────────────────────
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

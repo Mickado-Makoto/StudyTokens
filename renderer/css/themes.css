@@ -1,0 +1,78 @@
+/* ================================================
+   THEMES.CSS — Thème unique HabboCity Dark
+   Inspiré du style HabboCity : navy profond,
+   accents jaune/vert, cartes propres, pixel fun
+   ================================================ */
+
+:root {
+  /* ── Fonds ───────────────────────────────── */
+  --bg-deep:      #12122a;   /* fond le plus sombre */
+  --bg-base:      #1a1a35;   /* fond principal */
+  --bg-card:      #22223d;   /* cartes */
+  --bg-elevated:  #2a2a50;   /* éléments surélevés */
+  --bg-input:     #1a1a35;   /* champs de saisie */
+  --bg-sidebar:   #16162e;   /* sidebar */
+  --bg-titlebar:  #111128;   /* barre de titre */
+
+  /* ── Bordures ─────────────────────────────── */
+  --border:       rgba(255, 255, 255, 0.07);
+  --border-hover: rgba(255, 255, 255, 0.15);
+  --border-card:  rgba(255, 255, 255, 0.06);
+
+  /* ── Texte ────────────────────────────────── */
+  --text-primary:   #e8e8f0;
+  --text-secondary: #8888aa;
+  --text-muted:     #444466;
+
+  /* ── Accent principal — bleu-violet ──────── */
+  --accent:       #6b8cff;
+  --accent-dark:  #4a6ee0;
+  --accent-glow:  rgba(107, 140, 255, 0.25);
+  --accent-light: #99b3ff;
+
+  /* ── Couleurs fonctionnelles ─────────────── */
+  --teal:       #6b8cff;
+  --teal-glow:  rgba(107, 140, 255, 0.22);
+  --teal-light: #99b3ff;
+
+  --green:      #00c851;     /* bouton action principale HabboCity */
+  --green-dark: #00a041;
+  --green-glow: rgba(0, 200, 81, 0.22);
+
+  --yellow:     #f4c430;     /* accent doré HabboCity */
+  --yellow-dark:#d4a520;
+  --yellow-glow:rgba(244, 196, 48, 0.28);
+  --yellow-light:#fbd86e;
+
+  --mint:       #00d4aa;
+  --mint-glow:  rgba(0, 212, 170, 0.20);
+  --gold:       #f4c430;
+  --gold-glow:  rgba(244, 196, 48, 0.25);
+  --gold-light: #fbd86e;
+  --red:        #e05252;
+  --red-glow:   rgba(224, 82, 82, 0.20);
+  --purple:     #9b72ff;
+  --purple-glow:rgba(155, 114, 255, 0.25);
+
+  /* ── Layout ───────────────────────────────── */
+  --sidebar-w:  230px;
+  --titlebar-h: 44px;
+  --radius-sm:  6px;
+  --radius-md:  10px;
+  --radius-lg:  14px;
+  --radius-xl:  20px;
+
+  /* ── Typographie ─────────────────────────── */
+  --font-mono:  'Space Mono', monospace;
+  --font-title: 'Syne', 'Arial Black', sans-serif;
+  --font-body:  'Mulish', Arial, sans-serif;
+}
+
+/* ── Fond avec très légère texture ─────────── */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 70% 50% at 80% 10%, rgba(107,140,255,.06) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 10% 90%, rgba(0,200,81,.04) 0%, transparent 50%);
+}

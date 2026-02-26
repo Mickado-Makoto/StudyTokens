@@ -1,21 +1,86 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>StudyTokens</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;500;600;700;800&family=Mulish:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@700;800&family=Mulish:wght@400;500;600;700&family=Press+Start+2P&family=VT323:wght@400&display=swap" rel="stylesheet"/>
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/themes.css"/>
+  <link rel="stylesheet" href="css/base.css"/>
+  <link rel="stylesheet" href="css/components.css"/>
+  <link rel="stylesheet" href="css/timer.css"/>
+  <link rel="stylesheet" href="css/admin.css"/>
+  <link rel="stylesheet" href="css/effects.css"/>
+  <link rel="stylesheet" href="css/auth.css"/>
+  <link rel="stylesheet" href="css/responsive.css"/>
+  <link rel="stylesheet" href="css/notifications.css"/>
+  <link rel="stylesheet" href="css/pixel-theme.css"/>
+  <link rel="stylesheet" href="css/crash-screen.css"/>
+
+  <!-- Firebase SDK (compat mode) -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 </head>
 <body>
-  <div id="app">
-    <div id="loading">
-      <div class="loading-logo">✚</div>
-      <p style="font-family:'Space Mono',monospace;color:#00b4d8;font-size:13px">Chargement StudyTokens...</p>
+
+<!-- ===== ÉCRAN DE CHARGEMENT ===== -->
+<div id="loading-screen">
+  <div class="ls-particles" id="ls-particles"></div>
+  <div class="ls-content">
+    <div class="ls-logo-wrap">
+      <svg class="ls-orbit" viewBox="0 0 160 160">
+        <circle class="ls-orbit-ring" cx="80" cy="80" r="70"/>
+        <circle class="ls-orbit-dot" cx="150" cy="80" r="5"/>
+      </svg>
+      <svg class="ls-orbit ls-orbit-2" viewBox="0 0 160 160">
+        <circle class="ls-orbit-ring ls-orbit-ring-2" cx="80" cy="80" r="50"/>
+        <circle class="ls-orbit-dot ls-orbit-dot-2" cx="130" cy="80" r="4"/>
+      </svg>
+      <div class="ls-core">
+        <div class="ls-core-inner">ST</div>
+        <div class="ls-core-pulse"></div>
+      </div>
     </div>
+    <div class="ls-brand">Study<span>Tokens</span></div>
+    <div class="ls-bar-wrap">
+      <div class="ls-bar-track">
+        <div class="ls-bar-fill" id="ls-bar"></div>
+      </div>
+      <div class="ls-bar-pct" id="ls-pct">0%</div>
+    </div>
+    <div class="ls-step" id="ls-step">Initialisation...</div>
   </div>
-  <script src="app.js"></script>
+</div>
+
+<!-- ===== APP ROOT ===== -->
+<div id="app" style="display:none; height:100vh; flex-direction:column;"></div>
+<div id="toast-container"></div>
+
+<!-- ===== SCRIPTS ===== -->
+<script src="js/error-handler.js"></script>
+<script src="js/config.js"></script>
+<script src="js/sounds.js"></script>
+<script src="js/notifications.js"></script>
+<script src="js/firebase.js"></script>
+<script src="js/state.js"></script>
+<script src="js/timer.js"></script>
+<script src="js/pages.js"></script>
+<script src="js/badges.js"></script>
+<script src="js/goals.js"></script>
+<script src="js/stats.js"></script>
+<script src="js/flashcards.js"></script>
+<script src="js/admin-core.js"></script>
+<script src="js/admin-analytics.js"></script>
+<script src="js/admin-users.js"></script>
+<script src="js/admin-content.js"></script>
+<script src="js/admin-settings.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/diagnostics.js"></script>
+<script src="js/init.js"></script>
+
 </body>
 </html>
